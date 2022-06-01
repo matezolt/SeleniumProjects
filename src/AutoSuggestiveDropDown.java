@@ -14,7 +14,7 @@ public class AutoSuggestiveDropDown {
 		WebDriver driver = new ChromeDriver();  
 		driver.get("https://www.rahulshettyacademy.com/dropdownsPractise"); //URL in the browser
 		
-		driver.findElement(By.id("autosuggest")).sendKeys("dub");  //provide input
+		driver.findElement(By.id("autosuggest")).sendKeys("ind");  //provide input
 		Thread.sleep(1000);
 														//store all the options in a list
 		List<WebElement> options =driver.findElements(By.cssSelector("li[class='ui-menu-item'] a"));
