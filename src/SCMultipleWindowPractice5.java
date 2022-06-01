@@ -27,16 +27,20 @@ public class SCMultipleWindowPractice5 {
 		//webdriver.chrome.driver -> value of the path
 		WebDriver driver = new ChromeDriver();  
 			
-		driver.get("http://the-internet.herokuapp.com/horizontal_slider");
-		 int x = 10;
-		   WebElement slider = driver.findElement(By.cssSelector("input[type='range']"));
-		   int width = slider.getSize().getWidth();
-		   Actions act= new Actions(driver);
-		   act.moveToElement(slider, ((width*x)/100), 0).click();
-		   act.build().perform();
-		   System.out.println(driver.findElement(By.cssSelector("span#range")).getText());
+		driver.get("https://rahulshettyacademy.com/angularpractice");
+		driver.switchTo().newWindow(WindowType.TAB);  //open new tab & window   WindowType.Window & WindowType.Tab
+		Set<String> handles = driver.getWindowHandles(); //[parentid, childid]
+		Iterator<String> it = handles.iterator();
+		String parentId = it.next(); //grab zero index in the set
+		String childId = it.next();  //grab first index in the set  ==> moves to the child page
+		
+		driver.switchTo().window(childId); //activate 2nd tab
+		driver.get("https://rahulshettyacademy.com/");
+		String courseName = driver.findElements(By.cssSelector("a[href*='https://courses.rahulshettyacademy.com/p']")).get(1).getText();	
+	
+		driver.switchTo().window(parentId);
+		driver.findElement(By.cssSelector("[name='name']")).sendKeys(courseName);
 		   		   
-			
 	}
 }
 
